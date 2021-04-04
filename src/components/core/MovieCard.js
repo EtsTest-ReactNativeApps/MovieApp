@@ -7,10 +7,11 @@ import Typography from './Typography'
 import Icon from 'react-native-vector-icons/AntDesign'
 import Row from 'components/layout/Row'
 import HorizontalSpace from 'components/layout/HorizontalSpace'
-
+import LinearGradient from 'react-native-linear-gradient'
 
 const TextStyle = {
-  'alignItems': 'flex-start'
+  'alignItems': 'flex-start',
+  'marginLeft': 10
 }
 
 
@@ -18,24 +19,40 @@ const MovieCard = () => {
   return (
     <ViewContainer>
       <ImageBackground  imageStyle={{ borderRadius: 19}} style={styles.imageStyle} source={require('../../../assets/pic1.png')} > 
+        <LinearGradient colors={['transparent', '#191926']} style={styles.linearGradient}></LinearGradient>
         <Row>
           <LanguageBox />
           <HorizontalSpace width={'110px'}/>
           <Icon style={styles.iconStyle} size={24} color="white" name="heart" />
         </Row>
-        <View style={{marginLeft: 15, marginBottom:10}} >
-          <Typography {...TextStyle} fontColor={colors.wildWatermelon}>
-          Hello
+        <View style={{marginLeft: 10, marginBottom:10, alignItems:'flex-start'}} >
+          <Typography fontColor={colors.wildWatermelon} fontSize={'12px'}>
+          Action, Adventure, Drama
           </Typography>
-          <Icon  size={18} color="white" name="star" />
+          <Icon  size={14} color="white" name="star" />
         </View>
       </ImageBackground>
-
+      <Typography {...TextStyle} fontWeight={'700'} >
+        Avengers: End Game 
+      </Typography>
+      <Typography {...TextStyle} fontSize={'13px'} fontColor={colors.stormGray} fontWeight={'700'} >
+        137 MIN
+      </Typography>
     </ViewContainer>
   )
 }
 
 const styles= StyleSheet.create({
+  linearGradient: {
+    flex: 1,
+    paddingLeft: 15,
+    paddingRight: 15,
+    borderRadius: 5,
+    position: 'absolute',
+    width: '100%',
+    height:250,
+    
+  },
   imageStyle:{
     height: 250,
     resizeMode: 'cover',

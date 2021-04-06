@@ -1,5 +1,5 @@
 import React from 'react'
-import { ImageBackground, StyleSheet,View } from 'react-native'
+import { ImageBackground, StyleSheet,View} from 'react-native'
 import styled from 'styled-components'
 import colors from 'styles/colors'
 import LanguageBox from './LanguageBox'
@@ -8,6 +8,44 @@ import Icon from 'react-native-vector-icons/AntDesign'
 import Row from 'components/layout/Row'
 import HorizontalSpace from 'components/layout/HorizontalSpace'
 import LinearGradient from 'react-native-linear-gradient'
+import RateReview from './RateReview'
+
+
+
+
+const MovieCard = ({data}) => {
+  
+
+ 
+  return (
+    
+    <ViewContainer>
+      {/* {console.log(data)} */}
+      <ImageBackground  imageStyle={{ borderRadius: 19}} style={styles.imageStyle} source={{ uri: `http://image.tmdb.org/t/p/w500${data.poster_path}`  }} > 
+       
+        <LinearGradient colors={['transparent', '#191926']} style={styles.linearGradient}></LinearGradient>
+        <Row>
+          <LanguageBox language={data.original_language} />
+          <HorizontalSpace width={'110px'}/>
+          <Icon style={styles.iconStyle} size={24} color="white" name="heart" />
+        </Row>
+        <View style={{marginLeft: 10, marginBottom:10, alignItems:'flex-start'}} >
+          {/* <Typography fontColor={colors.wildWatermelon} fontSize={'12px'}>
+            Pop: {data.popularity}
+          </Typography> */}
+          <RateReview review={data.vote_count} stars={data.vote_average}/>
+        </View>
+      </ImageBackground>
+      <Typography  {...TextStyle} fontWeight={'700'} >
+        {data.original_title}
+      </Typography>
+      <Typography {...TextStyle} fontSize={'13px'} fontColor={colors.stormGray} fontWeight={'700'} >
+        {data.release_date}
+      </Typography>
+    </ViewContainer>
+  )
+}
+
 
 const TextStyle = {
   'alignItems': 'flex-start',
@@ -15,32 +53,16 @@ const TextStyle = {
 }
 
 
-const MovieCard = () => {
-  return (
-    <ViewContainer>
-      <ImageBackground  imageStyle={{ borderRadius: 19}} style={styles.imageStyle} source={require('../../../assets/pic1.png')} > 
-        <LinearGradient colors={['transparent', '#191926']} style={styles.linearGradient}></LinearGradient>
-        <Row>
-          <LanguageBox />
-          <HorizontalSpace width={'110px'}/>
-          <Icon style={styles.iconStyle} size={24} color="white" name="heart" />
-        </Row>
-        <View style={{marginLeft: 10, marginBottom:10, alignItems:'flex-start'}} >
-          <Typography fontColor={colors.wildWatermelon} fontSize={'12px'}>
-          Action, Adventure, Drama
-          </Typography>
-          <Icon  size={14} color="white" name="star" />
-        </View>
-      </ImageBackground>
-      <Typography {...TextStyle} fontWeight={'700'} >
-        Avengers: End Game 
-      </Typography>
-      <Typography {...TextStyle} fontSize={'13px'} fontColor={colors.stormGray} fontWeight={'700'} >
-        137 MIN
-      </Typography>
-    </ViewContainer>
-  )
-}
+const ViewContainer = styled.View`
+border: 1px solid ${colors.stormGray}
+border-radius: 20px
+height: 300px
+width: 48%
+margin-bottom: 10px
+align-self: center
+`
+
+export default MovieCard
 
 const styles= StyleSheet.create({
   linearGradient: {
@@ -65,13 +87,3 @@ const styles= StyleSheet.create({
   }
 })
 
-const ViewContainer = styled.View`
-border: 1px solid ${colors.stormGray}
-border-radius: 20px
-height: 300px
-width: 46%
-margin-bottom: 10px
-align-self: center
-`
-
-export default MovieCard

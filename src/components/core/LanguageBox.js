@@ -4,10 +4,10 @@ import styled from 'styled-components'
 
 import { StyleSheet, Text } from 'react-native'
 
-const LanguageBox = () => {
+const LanguageBox = ({language}) => {
   return (
     <ViewContainer>
-      <Text style={styles.fontStyle}>EN</Text>
+      <Text style={styles.fontStyle}>{language.toUpperCase()}</Text>
     </ViewContainer>
   )
 }

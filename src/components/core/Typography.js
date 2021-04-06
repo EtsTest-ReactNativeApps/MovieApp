@@ -8,7 +8,7 @@ const Typography = ({children, fontSize, fontWeight, fontColor, ...props}) => {
   return (
     <Container style={{...props}}>
       
-      <Text FC={fontColor} FW={fontWeight} FS={fontSize}>
+      <Text numberOfLines={1} FC={fontColor} FW={fontWeight} FS={fontSize}>
         {children}
       </Text>
     </Container>

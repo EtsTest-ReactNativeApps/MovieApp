@@ -19,7 +19,7 @@ const MovieCard = ( {navigation, data}) => {
    
     <ViewContainer>
       <TouchableOpacity 
-        onPress={() => navigation.navigate('MovieDetails')}
+        onPress={() => navigation.navigate('MovieDetails',{id: data.id})}
       >
         <ImageBackground  imageStyle={{ borderRadius: 19}} style={styles.imageStyle} source={{ uri: `http://image.tmdb.org/t/p/w500${data.poster_path}`  }} > 
           <LinearGradient colors={['transparent', '#191926']} style={styles.linearGradient}></LinearGradient>

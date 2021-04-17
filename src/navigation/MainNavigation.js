@@ -20,7 +20,6 @@ export default function MainNavigation  ()  {
         }}
       >
         <Stack.Screen name='Navigator' component={BottomNavigator} />
-
         <Stack.Screen name='MovieList' component={MovieList} />
         <Stack.Screen name='MovieDetails' component={MovieDetails} />
        

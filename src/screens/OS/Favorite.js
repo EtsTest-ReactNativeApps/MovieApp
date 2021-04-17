@@ -6,6 +6,7 @@ import MovieDB from '../../api/MovieDB'
 import R from 'ramda'
 
 import MovieCard from '../../components/core/MovieCard'
+import TopNavigation from 'navigation/TopNavigation'
 const { getMovies } = MovieDB()
 const Todos = () => {
  
@@ -28,6 +29,7 @@ const Todos = () => {
   console.log(merged)
   return(
     <View>
+      <TopNavigation />
       {/* <Button title={'1'} onPress={()=> setPage(2)}   /> */}
       <FlatList 
         columnWrapperStyle={{justifyContent: 'space-between'}}

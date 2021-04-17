@@ -1,50 +1,42 @@
 import React,{useState} from 'react'
-// import {QueryClient, QueryClientProvider, useQuery } from 'react-query'
+import { useInfiniteQuery, useQuery } from 'react-query'
 import ContainerView from '../../components/layout/ContainerView'
 import Typography from '../../components/core/Typography'
 import MovieCard from 'components/core/MovieCard'
 import Row from 'components/layout/Row'
+import R from 'ramda'
 import MovieDB from '../../api/MovieDB'
-import { View,Button,FlatList } from 'react-native'
+import { View,Text,FlatList } from 'react-native'
+
+
 
 const Home = () => {
-  const [results, setResults] = useState('')
 
-  // const queryClient = new QueryClient()
+  const { getMovies } = MovieDB()
+  
+  const {  data ,isLoading, error,fetchNextPage} =   useInfiniteQuery('Movies', 
+    ({ pageParam = 1 }) => getMovies( '/popular',pageParam),
+    { getNextPageParam: lastPage => lastPage.page + 1 })
 
-  // const fetchMovies = async () =>{
-  //   const response = await fetch(MovieDB)
-  //   return response.json()
-  // }
-  // if (isLoading) return 'Loading...'
+  var merged = R.flatten(R.pluck('results')(R.propOr([], 'pages', data)))
 
-  // if (error) return 'An error has occurred: ' + error.message
+  if (isLoading) return <Text>Loading...</Text>
 
-  // const {data, status} = useQuery('movies', fetchMovies)
+  if (error) return<Text> 'An error has occurred: ' + {error.message} </Text>
 
-
-  const searchApi = async () =>{
-    const response = await MovieDB.get('/popular',{
-      params:{
-        api_key: '0ac3457a0aa995943c87e622ef7d3075',
-        page:1,
-        language: 'en-US'
-      }
-    })
-    setResults(response.data.results) 
-  }
-
+ 
   return (
     <ContainerView>
 
       <Typography>This is home</Typography>
-      <Button title="Press" onPress={searchApi} />
+      
       <View >
         <FlatList 
           columnWrapperStyle={{justifyContent: 'space-between'}}
           contentContainerStyle={{paddingBottom: 50}}
+          onEndReached={() => fetchNextPage()}
           numColumns={2}
-          data={results}
+          data={merged}
           keyExtractor={results => results.id}
           renderItem={({ item }) => {
             return (     

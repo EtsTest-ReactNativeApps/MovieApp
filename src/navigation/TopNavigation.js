@@ -2,25 +2,11 @@ import React from 'react'
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs'
 import colors from 'styles/colors'
 import MovieList from 'components/core/MovieList'
+import Typography from 'components/core/Typography'
 
-const PopularTap = () =>{
-  return( 
-    <MovieList routeName="/popular"/>)
-}
-const TopRated = () =>{
-  return( 
-    <MovieList routeName="/top_rated"/>)
-}
-const UpComing = () =>{
-  return( 
-    <MovieList routeName="/upcoming"/>)
-}
 const TopNavigation = () => {
 
   const Tab = createMaterialTopTabNavigator()
-
- 
-  
 
   return (
     <Tab.Navigator 
@@ -30,9 +16,22 @@ const TopNavigation = () => {
         indicatorStyle: {backgroundColor: colors.radicalRed},
         style: { backgroundColor: colors.backColor },
       }}>
-      <Tab.Screen name="Popular" component={PopularTap} />
-      <Tab.Screen name="Top Rated" component={TopRated} />
-      <Tab.Screen name="Up Coming" component={UpComing} />
+      <Tab.Screen name="popular" component={MovieList }
+        options={{
+          tabBarLabel: ({ focused }) => (
+            <Typography fontColor={focused ? colors.white : colors.steelgray} fontWeight={700} > Popular</Typography>
+          )}}
+      />
+      <Tab.Screen name="top_rated" component={MovieList}
+        options={{
+          tabBarLabel: ({ focused }) => (
+            <Typography fontColor={focused ? colors.white : colors.steelgray} fontWeight={700} > Top Rated</Typography>
+          )}} />
+      <Tab.Screen name="upcoming" component={MovieList}
+        options={{
+          tabBarLabel: ({ focused }) => (
+            <Typography fontColor={focused ? colors.white : colors.steelgray} fontWeight={700} > Upcoming</Typography>
+          )}} />
     </Tab.Navigator>
   )
 }

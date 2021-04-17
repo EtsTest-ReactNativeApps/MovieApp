@@ -11,17 +11,16 @@ import LinearGradient from 'react-native-linear-gradient'
 import RateReview from './RateReview'
 
 
-
-
-
-const MovieCard = ({data}) => {
+const MovieCard = ( {navigation, data}) => {
   
 
  
   return (
    
     <ViewContainer>
-      <TouchableOpacity  >
+      <TouchableOpacity 
+        onPress={() => navigation.navigate('MovieDetails')}
+      >
         <ImageBackground  imageStyle={{ borderRadius: 19}} style={styles.imageStyle} source={{ uri: `http://image.tmdb.org/t/p/w500${data.poster_path}`  }} > 
           <LinearGradient colors={['transparent', '#191926']} style={styles.linearGradient}></LinearGradient>
           <Row>

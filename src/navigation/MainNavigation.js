@@ -2,7 +2,9 @@ import React from 'react'
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 import  BottomNavigator  from '../navigation/BottomNavigation'
+import MovieList from 'components/core/MovieList'
 import MovieDetails from 'components/core/MovieDetails'
+
 
 
 
@@ -18,7 +20,10 @@ export default function MainNavigation  ()  {
         }}
       >
         <Stack.Screen name='Navigator' component={BottomNavigator} />
-        <Stack.Screen name='Movie Details' component={MovieDetails} />
+
+        <Stack.Screen name='MovieList' component={MovieList} />
+        <Stack.Screen name='MovieDetails' component={MovieDetails} />
+       
         
       </Stack.Navigator>
     </NavigationContainer>

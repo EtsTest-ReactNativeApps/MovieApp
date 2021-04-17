@@ -2,18 +2,16 @@ import MovieDB from 'api/MovieDB'
 import Container from 'components/layout/ContainerView'
 import React from 'react'
 import { View,Text } from 'react-native'
-import { FlatList, TouchableOpacity } from 'react-native-gesture-handler'
+import { FlatList } from 'react-native-gesture-handler'
 import MovieCard from './MovieCard'
 import { useInfiniteQuery } from 'react-query'
-import { withNavigation } from 'react-navigation'
 import R from 'ramda'
 
-const MovieList = ({Navigation,routeName}) => {
+const MovieList = ({navigation,route}) => {
 
   const { getMovies } = MovieDB()
   
-
-  
+  const routeName= route.name
   
   const {  data ,isLoading, error,fetchNextPage} =   useInfiniteQuery(['Movies',routeName], 
     ({ pageParam = 1 }) => getMovies( routeName,pageParam),
@@ -38,8 +36,8 @@ const MovieList = ({Navigation,routeName}) => {
           keyExtractor={results => results.id}
           renderItem={({ item }) => {
             return (     
-             
-              <MovieCard data={item} />   
+            
+              <MovieCard navigation={navigation} data={item} />   
              
             )
           }}

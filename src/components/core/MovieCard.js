@@ -1,5 +1,5 @@
 import React from 'react'
-import { ImageBackground, StyleSheet,View} from 'react-native'
+import { ImageBackground, StyleSheet,View,TouchableOpacity} from 'react-native'
 import styled from 'styled-components'
 import colors from 'styles/colors'
 import LanguageBox from './LanguageBox'
@@ -13,36 +13,37 @@ import RateReview from './RateReview'
 
 
 
+
 const MovieCard = ({data}) => {
   
 
  
   return (
-    
+   
     <ViewContainer>
-      {/* {console.log(data)} */}
-      <ImageBackground  imageStyle={{ borderRadius: 19}} style={styles.imageStyle} source={{ uri: `http://image.tmdb.org/t/p/w500${data.poster_path}`  }} > 
-       
-        <LinearGradient colors={['transparent', '#191926']} style={styles.linearGradient}></LinearGradient>
-        <Row>
-          <LanguageBox language={data.original_language} />
-          <HorizontalSpace width={'110px'}/>
-          <Icon style={styles.iconStyle} size={24} color="white" name="heart" />
-        </Row>
-        <View style={{marginLeft: 10, marginBottom:10, alignItems:'flex-start'}} >
-          {/* <Typography fontColor={colors.wildWatermelon} fontSize={'12px'}>
-            Pop: {data.popularity}
-          </Typography> */}
-          <RateReview review={data.vote_count} stars={data.vote_average}/>
-        </View>
-      </ImageBackground>
-      <Typography  {...TextStyle} fontWeight={'700'} >
-        {data.original_title}
-      </Typography>
-      <Typography {...TextStyle} fontSize={'13px'} fontColor={colors.stormGray} fontWeight={'700'} >
-        {data.release_date}
-      </Typography>
+      <TouchableOpacity  >
+        <ImageBackground  imageStyle={{ borderRadius: 19}} style={styles.imageStyle} source={{ uri: `http://image.tmdb.org/t/p/w500${data.poster_path}`  }} > 
+          <LinearGradient colors={['transparent', '#191926']} style={styles.linearGradient}></LinearGradient>
+          <Row>
+            <LanguageBox language={data.original_language} />
+            <HorizontalSpace width={'110px'}/>
+            <TouchableOpacity>
+              <Icon style={styles.iconStyle} size={24} color="white" name="heart" />
+            </TouchableOpacity>
+          </Row>
+          <View style={{marginLeft: 10, marginBottom:10, alignItems:'flex-start'}} >
+            <RateReview review={data.vote_count} stars={data.vote_average}/>
+          </View>
+        </ImageBackground>
+        <Typography  {...TextStyle} fontWeight={'700'} >
+          {data.original_title}
+        </Typography>
+        <Typography {...TextStyle} fontSize={'13px'} fontColor={colors.stormGray} fontWeight={'700'} >
+          {data.release_date}
+        </Typography>
+      </TouchableOpacity>
     </ViewContainer>
+
   )
 }
 

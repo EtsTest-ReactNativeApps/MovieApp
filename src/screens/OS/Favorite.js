@@ -1,12 +1,12 @@
-// import MovieDB from 'api/MovieDB'
-import React, { useState } from 'react'
-import { Text, View,FlatList, Button } from 'react-native'
-import { useInfiniteQuery, useQuery } from 'react-query'
+import React  from 'react'
+import { Text, View,FlatList,ActivityIndicator,StyleSheet } from 'react-native'
+import { useInfiniteQuery} from 'react-query'
 import MovieDB from '../../api/MovieDB'
 import R from 'ramda'
 
 import MovieCard from '../../components/core/MovieCard'
 import TopNavigation from 'navigation/TopNavigation'
+import colors from 'styles/colors'
 const { getMovies } = MovieDB()
 const Todos = () => {
  
@@ -15,10 +15,8 @@ const Todos = () => {
     ({ pageParam = 1 }) => getMovies( '/popular',pageParam),
     { getNextPageParam: lastPage => lastPage.page + 1 })
 
-  // const {  data: MoiveData ,isLoading, error} =   useQuery('Movies', () => fetchMovies())
-
   
-  if (isLoading) return <Text>Loading...</Text>
+  if (isLoading) return <View  style={styles.indicator}><ActivityIndicator  size="large" color= {colors.radicalRed} /></View>
 
   if (error) return<Text> 'An error has occurred: ' + {error.message} </Text>
 
@@ -26,11 +24,10 @@ const Todos = () => {
 
   var merged = R.flatten(R.pluck('results')(R.propOr([], 'pages', data)))
 
-  console.log(merged)
+ 
   return(
     <View>
       <TopNavigation />
-      {/* <Button title={'1'} onPress={()=> setPage(2)}   /> */}
       <FlatList 
         columnWrapperStyle={{justifyContent: 'space-between'}}
         contentContainerStyle={{paddingBottom: 50}}
@@ -45,10 +42,7 @@ const Todos = () => {
           )
         }}
       />
-      {/*      
-      <Button title={'2'} />
-      <Button title={'3'}  /> */}
-      
+
     </View>
   )
  
@@ -57,38 +51,28 @@ const Todos = () => {
 
 const Favorite = () => {
 
-  // const info = useQuery('todos', fetchTodoList)
-
-  // const { isLoading, error, data } = useQuery('repoData', () =>
-  //   fetch('https://api.github.com/repos/tannerlinsley/react-query').then(res =>
-  //     res.json()
-  //   )
-  // )
-  // if (isLoading) return <Text>Loading...</Text>
-
-  // if (error) return<Text> 'An error has occurred: '</Text> + error.message
 
  
   return (
     <View>
-      {/* <Text>
-        {data.id}
-      </Text> */}
+
      
       <Todos/>
-     
-      {/* <FlatList 
-        
-        data={data}
-     
-        renderItem={({ item }) => {
-          return (     
-            <Text>{item.config}</Text>
-          )
-        }}
-      /> */}
+   
     </View>
   )
 }
 
 export default Favorite
+const styles = StyleSheet.create({
+  indicator: {
+   
+    justifyContent: 'center',
+    alignSelf:'center',
+    height:'100%',
+    backgroundColor: colors.backColorLight,
+    width:'100%'
+   
+  },
+ 
+})

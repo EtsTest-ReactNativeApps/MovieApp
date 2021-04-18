@@ -18,6 +18,8 @@ target 'FilmApp' do
 
   pod 'BVLinearGradient', :path => '../node_modules/react-native-linear-gradient'
 
+  pod 'react-native-background-timer', :path => '../node_modules/react-native-background-timer'
+
   target 'FilmAppTests' do
     inherit! :complete
     # Pods for testing

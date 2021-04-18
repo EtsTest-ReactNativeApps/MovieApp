@@ -1,5 +1,5 @@
-import React from 'react'
-import { ImageBackground, StyleSheet,View,TouchableOpacity} from 'react-native'
+import React, {useState} from 'react'
+import { ImageBackground, StyleSheet,View,TouchableOpacity,Button} from 'react-native'
 import styled from 'styled-components'
 import colors from 'styles/colors'
 import LanguageBox from './LanguageBox'
@@ -9,15 +9,25 @@ import Row from 'components/layout/Row'
 import HorizontalSpace from 'components/layout/HorizontalSpace'
 import LinearGradient from 'react-native-linear-gradient'
 import RateReview from './RateReview'
+import MovieDB from 'api/MovieDB'
+
+
+
+
 
 
 const MovieCard = ( {navigation, data}) => {
   
-
+  const { addToFav } = MovieDB()
+  
+  const [fav, setFav] = useState(false)
  
+ 
+  
   return (
    
     <ViewContainer>
+     
       <TouchableOpacity 
         onPress={() => navigation.navigate('MovieDetails',{id: data.id})}
       >
@@ -26,8 +36,8 @@ const MovieCard = ( {navigation, data}) => {
           <Row>
             <LanguageBox language={data.original_language} />
             <HorizontalSpace width={'110px'}/>
-            <TouchableOpacity>
-              <Icon style={styles.iconStyle} size={24} color="white" name="heart" />
+            <TouchableOpacity onPress={()=> {fav === false ? setFav(true) : setFav(false)}}>
+              <Icon style={styles.iconStyle} size={24} color={fav === true ? colors.radicalRed : 'white'} name="heart" />
             </TouchableOpacity>
           </Row>
           <View style={{marginLeft: 10, marginBottom:10, alignItems:'flex-start'}} >

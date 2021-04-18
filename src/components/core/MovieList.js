@@ -1,26 +1,29 @@
 import MovieDB from 'api/MovieDB'
 import Container from 'components/layout/ContainerView'
 import React from 'react'
-import { View,Text } from 'react-native'
+import { View,Text,ActivityIndicator,StyleSheet } from 'react-native'
 import { FlatList } from 'react-native-gesture-handler'
 import MovieCard from './MovieCard'
 import { useInfiniteQuery } from 'react-query'
 import R from 'ramda'
+import colors from 'styles/colors'
+
 
 const MovieList = ({navigation,route}) => {
 
   const { getMovies } = MovieDB()
   
   const routeName= route.name
-  
-  const {  data ,isLoading, error,fetchNextPage} =   useInfiniteQuery(['Movies',routeName], 
+ 
+  const {  data ,isLoading, error,fetchNextPage} =    useInfiniteQuery(['Movies',routeName], 
     ({ pageParam = 1 }) => getMovies( routeName,pageParam),
     { getNextPageParam: lastPage => lastPage.page + 1 })
 
 
   var merged = R.flatten(R.pluck('results')(R.propOr([], 'pages', data)))
 
-  if (isLoading) return <Text>Loading...</Text>
+
+  if (isLoading) return  <View  style={styles.indicator}><ActivityIndicator  size="large" color= {colors.radicalRed} /></View>
 
   if (error) return<Text> 'An error has occurred: ' + {error.message} </Text>
 
@@ -49,3 +52,16 @@ const MovieList = ({navigation,route}) => {
 }
 
 export default MovieList
+
+const styles = StyleSheet.create({
+  indicator: {
+   
+    justifyContent: 'center',
+    alignSelf:'center',
+    height:'100%',
+    backgroundColor: colors.backColorLight,
+    width:'100%'
+   
+  },
+ 
+})

@@ -1,7 +1,18 @@
+import {useState} from 'react'
 import axios from 'axios'
 
 
 export default () => {
+
+ 
+
+  function addToFav(id) {
+    const [favList, setFavList] = useState([])
+    favList.includes(id) ? setFavList(favList.filter(item => item !== id)) : setFavList([...favList,id])
+    console.log(favList)
+  
+  }
+
 
   const getRequest = axios.create({
    
@@ -57,6 +68,6 @@ export default () => {
  
  
 
-  return { getMovies,getMovieDetails,getMovieRecommendations}
+  return { getMovies,getMovieDetails,getMovieRecommendations,addToFav}
 
 }

@@ -1,5 +1,5 @@
 import React from 'react'
-import { ImageBackground, StyleSheet,View,Text,FlatList, Image} from 'react-native'
+import { ImageBackground, StyleSheet,View,Text,FlatList, ActivityIndicator} from 'react-native'
 import styled from 'styled-components'
 import colors from 'styles/colors'
 import LanguageBox from './LanguageBox'
@@ -34,9 +34,10 @@ const MovieDetails = ({navigation,route}) => {
 
   var Details = data
  
-  console.log(Recommend)
+
   
-  if (isLoading) return <Text>Loading...</Text>
+  if (isLoading) return <View  style={styles.indicator}><ActivityIndicator  size="large" color= {colors.radicalRed} /></View>
+
 
   if (error) return<Text> 'An error has occurred: ' + {error.message} </Text>
 
@@ -52,6 +53,7 @@ const MovieDetails = ({navigation,route}) => {
           <Row direction={'flex-end'}>
           
             <HorizontalSpace width={'110px'}/>
+            
             <Icon style={styles.iconStyle} size={24} color="white" name="heart" />
           </Row>
           
@@ -171,7 +173,16 @@ const styles= StyleSheet.create({
   paragrapghStyle:{
     marginHorizontal: 15,
     backgroundColor: colors.backColor
-  }
+  },
+  indicator: {
+   
+    justifyContent: 'center',
+    alignSelf:'center',
+    height:'100%',
+    backgroundColor: colors.backColorLight,
+    width:'100%'
+   
+  },
 })
   
   

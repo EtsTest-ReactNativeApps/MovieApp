@@ -18,7 +18,7 @@ const Container = ({ children }) => {
 
 const ContainerView = styled(SafeAreaView)`
     align-items:center;
-    
+  
     width: 100%
     height: 100%
     background: ${colors.backColor}; 

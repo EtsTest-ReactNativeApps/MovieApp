@@ -25,9 +25,10 @@ const MovieList = ({navigation,route}) => {
   if (error) return<Text> 'An error has occurred: ' + {error.message} </Text>
 
   return (
-    <Container>
-      <View >
-        <FlatList 
+    <Container >
+      <View  >
+        <FlatList
+          style={{paddingTop: 15}} 
           columnWrapperStyle={{justifyContent: 'space-between'}}
           contentContainerStyle={{paddingBottom: 50}}
           onEndReached={() => fetchNextPage()}

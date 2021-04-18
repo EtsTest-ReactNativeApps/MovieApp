@@ -35,7 +35,7 @@ const MovieCard = ( {navigation, data}) => {
           </View>
         </ImageBackground>
         <Typography  {...TextStyle} fontWeight={'700'} >
-          {data.original_title}
+          {data.title}
         </Typography>
         <Typography {...TextStyle} fontSize={'13px'} fontColor={colors.stormGray} fontWeight={'700'} >
           {data.release_date}

@@ -21,6 +21,20 @@ export default () => {
  
   
   }
+  const getMovieRecommendations = async (id) =>{
+
+    const response = await getRequest.get(`/${id}/recommendations`,{
+      params:{
+        api_key: '0ac3457a0aa995943c87e622ef7d3075', 
+       
+      }
+    })
+
+    const movieRecommend = response.data
+    return movieRecommend
+ 
+  
+  }
   const getMovies = async (type,pageParam) =>{
 
     const response = await getRequest.get(`/${type}`,{
@@ -43,6 +57,6 @@ export default () => {
  
  
 
-  return { getMovies,getMovieDetails}
+  return { getMovies,getMovieDetails,getMovieRecommendations}
 
 }

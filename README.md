@@ -18,6 +18,8 @@ The design inspired by: https://lnkd.in/dtN8VzF
 # Demo
 ![MovieApp demp](https://github.com/DanielSameh/MovieApp/blob/master/assets/Video1.gif)
 <br>
+
+# Screenshots from the App
 <div> 
 <img src="https://github.com/DanielSameh/MovieApp/blob/master/assets/Screen1.png" alt="Girl in a jacket" width="300" height="500">
 <img src="https://github.com/DanielSameh/MovieApp/blob/master/assets/Screen2.png" alt="Girl in a jacket" width="300" height="500">

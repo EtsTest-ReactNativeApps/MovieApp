@@ -1,78 +1,45 @@
-import React  from 'react'
-import { Text, View,FlatList,ActivityIndicator,StyleSheet } from 'react-native'
-import { useInfiniteQuery} from 'react-query'
-import MovieDB from '../../api/MovieDB'
-import R from 'ramda'
 
-import MovieCard from '../../components/core/MovieCard'
-import TopNavigation from 'navigation/TopNavigation'
+import FavoriteList from 'components/core/FavoriteList'
+import Container from 'components/layout/ContainerView'
+import FavContext from 'context/FavContext'
+import React, {useContext} from 'react'
 import colors from 'styles/colors'
-const { getMovies } = MovieDB()
-const Todos = () => {
- 
+import { Text, View,FlatList,Button,StyleSheet } from 'react-native'
+import Typography from 'components/core/Typography'
 
-  const {  data ,isLoading, error,fetchNextPage} =   useInfiniteQuery('Movies', 
-    ({ pageParam = 1 }) => getMovies( '/popular',pageParam),
-    { getNextPageParam: lastPage => lastPage.page + 1 })
 
-  
-  if (isLoading) return <View  style={styles.indicator}><ActivityIndicator  size="large" color= {colors.radicalRed} /></View>
 
-  if (error) return<Text> 'An error has occurred: ' + {error.message} </Text>
+const Favorite = ({navigation}) => {
 
- 
 
-  var merged = R.flatten(R.pluck('results')(R.propOr([], 'pages', data)))
-
- 
-  return(
-    <View>
-      <TopNavigation />
-      <FlatList 
-        columnWrapperStyle={{justifyContent: 'space-between'}}
-        contentContainerStyle={{paddingBottom: 50}}
-        numColumns={2}
-        onEndReached={() => fetchNextPage()}
-        data={merged}
-        keyExtractor={results => results.id}
-        renderItem={({ item }) => {
-          return (  
-            
-            <MovieCard data={item} />   
-          )
-        }}
-      />
-
-    </View>
-  )
- 
-
-}
-
-const Favorite = () => {
-
+  const {favList} = useContext(FavContext)
 
  
   return (
-    <View>
-
-     
-      <Todos/>
-   
-    </View>
+    <Container >
+      <Typography {...TextStyle}fontSize={'18px'} fontWeight={'bold'}>FAVORITE</Typography>
+      <View  >
+        <FlatList
+          style={{paddingTop: 15 }} 
+          contentContainerStyle={{paddingBottom: 50}}
+          data={favList}
+          keyExtractor={results => results}
+          renderItem={({ item }) => {
+            return (     
+          
+              <FavoriteList navigation={navigation}id={item}/>
+             
+            )
+          }}
+        />
+      </View>
+    </Container>
   )
 }
 
 export default Favorite
-const styles = StyleSheet.create({
-  indicator: {
-   
-    justifyContent: 'center',
-    alignSelf:'center',
-    height:'100%',
-    backgroundColor: colors.backColorLight,
-    width:'100%'
-   
-  },
- 
-})
+
+const TextStyle = {
+  'marginTop': 10,
+  
+}

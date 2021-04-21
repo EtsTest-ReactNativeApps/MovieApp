@@ -1,33 +1,54 @@
 
+import FavoriteList from 'components/core/FavoriteList'
+import Container from 'components/layout/ContainerView'
 import FavContext from 'context/FavContext'
 import React, {useContext} from 'react'
-import { Text, View,FlatList,Button } from 'react-native'
+import { Text, View,FlatList,Button,StyleSheet } from 'react-native'
+import { useQuery } from 'react-query'
+import colors from 'styles/colors'
+
 
 
 const Profile = () => {
 
+
+
   const {favList,addFavMovie,removeFavMovie} = useContext(FavContext)
 
   return (
-    <View>
-      <Text> This is Profile Screen</Text>
-      {console.log(favList)}
-      {/* <Button title="Add Post" onPress={() => addFavMovie(Math.floor(Math.random() * 999))}/> */}
-      <FlatList
-        data={favList}
-        key = {result => result.id}
-        renderItem={({ item }) => {
-          return (  
-            <View>
-              <Text>{item}</Text>
-              
-            </View>
-          )
-        }}
-      />
-
-    </View>
+    <Container >
+      <View  >
+        <FlatList
+          style={{paddingTop: 15 }} 
+      
+          contentContainerStyle={{paddingBottom: 50}}
+       
+          data={favList}
+          keyExtractor={results => results}
+          renderItem={({ item }) => {
+            return (     
+          
+              <FavoriteList id={item}/>
+             
+            )
+          }}
+        />
+      </View>
+    </Container>
   )
 }
 
 export default Profile
+
+const styles = StyleSheet.create({
+  indicator: {
+   
+    justifyContent: 'center',
+    alignSelf:'center',
+    height:'100%',
+    backgroundColor: colors.backColorLight,
+    width:'100%'
+   
+  },
+ 
+})

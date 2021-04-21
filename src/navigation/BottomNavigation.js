@@ -6,6 +6,7 @@ import Home from '../screens/OS/Home'
 import { StyleSheet } from 'react-native'
 import colors from 'styles/colors'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
+import Ionicons from 'react-native-vector-icons/Ionicons'
 
 const HomeBottomNavigator = () => {
   const Tab = createBottomTabNavigator()
@@ -22,22 +23,22 @@ const HomeBottomNavigator = () => {
       <Tab.Screen name='Home' component={Home}
         options={{
           tabBarLabel: 'Home',
-          tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="home" color={color} size={size} />
+          tabBarIcon: ({ focused,color, size }) => (
+            <MaterialCommunityIcons name= {focused ? 'home': 'home-outline'} color={color} size={size} />
           ),
         }} />
       <Tab.Screen name='Favorite' component={Favorite}
         options={{
           tabBarLabel: 'Favorite',
-          tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="home" color={color} size={size} />
+          tabBarIcon: ({focused, color, size }) => (
+            <MaterialCommunityIcons name= {focused ? 'heart': 'heart-outline'} color={color} size={size} />
           ),
         }}  />
       <Tab.Screen name='Profile' component={Profile}
         options={{
           tabBarLabel: 'Profile',
-          tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="home" color={color} size={size} />
+          tabBarIcon: ({ focused,color, size }) => (
+            <Ionicons name= {focused ? 'person': 'person-outline'} color={color} size={size} />
           ),
         }}  />
 

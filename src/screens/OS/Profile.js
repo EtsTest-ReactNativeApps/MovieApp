@@ -3,6 +3,7 @@ import FavoriteList from 'components/core/FavoriteList'
 import Typography from 'components/core/Typography'
 import Container from 'components/layout/ContainerView'
 import Row from 'components/layout/Row'
+import VerticalSpace from 'components/layout/VerticalSpace'
 import FavContext from 'context/FavContext'
 import React, {useContext} from 'react'
 import { Text, View,FlatList,Button,StyleSheet,Image,TouchableOpacity } from 'react-native'
@@ -24,7 +25,9 @@ const Profile = ({navigation}) => {
         <Image style={styles.imageStyle} source={require('../../../assets/pic2.png')}/>
       </View>
       <View style={styles.paraStyle}>
+        <Typography {...header2Style}fontSize={'18px'} fontWeight={'bold'}>Daniel Sameh</Typography>
         <Row>
+          
           <Typography {...TextStyle }  fontWeight={'bold'}textAlign={'center'} centerPara  isParagrapgh>
             {favList.length}{'\n'}Movies
           </Typography>
@@ -58,6 +61,12 @@ export default Profile
 
 const headerStyle = {
   'marginTop': 10,
+  
+  
+}
+const header2Style = {
+
+  'marginBottom':30
   
   
 }

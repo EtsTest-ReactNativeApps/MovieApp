@@ -3,17 +3,12 @@ import FavoriteList from 'components/core/FavoriteList'
 import Container from 'components/layout/ContainerView'
 import FavContext from 'context/FavContext'
 import React, {useContext} from 'react'
-import colors from 'styles/colors'
-import { Text, View,FlatList,Button,StyleSheet } from 'react-native'
+import {View,FlatList } from 'react-native'
 import Typography from 'components/core/Typography'
-
-
 
 const Favorite = ({navigation}) => {
 
-
   const {favList} = useContext(FavContext)
-
  
   return (
     <Container >

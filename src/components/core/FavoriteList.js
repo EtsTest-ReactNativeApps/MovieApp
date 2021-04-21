@@ -1,6 +1,5 @@
 import HorizontalSpace from 'components/layout/HorizontalSpace'
 import Row from 'components/layout/Row'
-import VerticalSpace from 'components/layout/VerticalSpace'
 import React, { useContext } from 'react'
 import Icon from 'react-native-vector-icons/AntDesign'
 import { Text,View,TouchableOpacity,ActivityIndicator,ImageBackground,StyleSheet } from 'react-native'
@@ -57,36 +56,15 @@ const FavoriteList = ({navigation,id}) => {
             {Details.runtime}  Min
           </Typography> 
           <Typography {...ParaStyle} isParagrapgh fontSize={'12px'}>{Details.overview}</Typography>
+          <TouchableOpacity style={styles.buttonStyle}  onPress={() => navigation.navigate('MovieDetails',{id: Details.id})}>
+            <LinearGradient style={styles.linearGradient2} colors={[colors.gradientStart,colors.gradientEnd ]}>
+              <Typography fontWeight={'bold'} fontSize={'12px'}>BOOK YOUR TICKET</Typography>
+            </LinearGradient>
+          </TouchableOpacity>
         </View>
+
       </ViewContainer>
     </TouchableOpacity>
-  // <ViewContainer>
-     
-  //   {/* <TouchableOpacity 
-  //     onPress={() => navigation.navigate('MovieDetails',{id: Details.id})}
-  //   >
-  //     <ImageBackground  imageStyle={{ borderRadius: 19}} style={styles.imageStyle} source={{ uri: `http://image.tmdb.org/t/p/w500${Details.poster_path}`  }} > 
-  //       <LinearGradient colors={['transparent', '#191926']} style={styles.linearGradient}></LinearGradient>
-  //       <Row>
-  //         <LanguageBox language={Details.original_language} />
-  //         <HorizontalSpace width={'110px'}/>
-  //         <TouchableOpacity onPress={()=> {favList.includes(id) === false ? addFavMovie(id) :   removeFavMovie(id)}}>
-  //           <Icon style={styles.iconStyle} size={24} color={favList.includes(id) === true ? colors.radicalRed : 'white'} name="heart" />
-  //         </TouchableOpacity>
-  //       </Row>
-  //       <View style={{marginLeft: 10, marginBottom:10, alignItems:'flex-start'}} >
-  //         <RateReview review={Details.vote_count} stars={Details.vote_average}/>
-  //       </View>
-  //     </ImageBackground> */}
-     
-  //   {/* <Typography  {...TextStyle} fontWeight={'700'} >
-  //     {Details.title}
-  //   </Typography> */}
-  //   {/* <Typography {...TextStyle} fontSize={'13px'} fontColor={colors.stormGray} fontWeight={'700'} >
-  //       {Details.release_date}
-  //     </Typography>
-  //   </TouchableOpacity> */}
-  // </ViewContainer>
   )
   
 
@@ -94,12 +72,13 @@ const FavoriteList = ({navigation,id}) => {
 export default FavoriteList
 
 const TextStyle = {
-  'textAlign': 'left',
+  
   
 }
 const ParaStyle = {
   'textAlign': 'left',
-  'width': '80%'
+  'width': '80%',
+  'height':80
 }
   
 const ViewContainer = styled.View`
@@ -114,6 +93,7 @@ align-self: center
 `
 
 const styles= StyleSheet.create({
+
   linearGradient: {
     flex: 1,
     paddingLeft: 15,
@@ -125,17 +105,15 @@ const styles= StyleSheet.create({
     height:248,
         
   },
-  linearGradient2: {
-    flex: 1,
-    paddingLeft: 15,
-    paddingRight: 15,
-    marginBottom:15,
-    borderTopLeftRadius:19,borderBottomLeftRadius: 19,   
-    position: 'absolute',
-    width: '100%',
-    height:248,
-        
+  linearGradient2:{
+    height: 30,
+    width:'90%',
+    borderRadius: 15,
+    justifyContent:'center',
+    alignItems:'center'
+
   },
+ 
   imageStyle:{
     height: 248,
     width: '100%',
@@ -143,22 +121,19 @@ const styles= StyleSheet.create({
 
  
   },
-  similarImageStyle:{
-    height:170,
-    width:150,
-     
+  buttonStyle:{
+    marginTop: 30,
+    width:'90%',
     justifyContent:'center',
-    margin:10
+    alignItems:'center'
   },
+ 
     
   iconStyle:{
     marginTop: 18,
-    marginRight: 25
+    marginRight: 15
   },
-  paragrapghStyle:{
-    marginHorizontal: 15,
-    backgroundColor: colors.backColor
-  },
+
   indicator: {
      
     justifyContent: 'center',

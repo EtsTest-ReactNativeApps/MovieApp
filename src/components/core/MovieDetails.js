@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import { ImageBackground, StyleSheet,View,Text,FlatList, ActivityIndicator} from 'react-native'
 import styled from 'styled-components'
 import colors from 'styles/colors'
@@ -14,6 +14,7 @@ import { useQuery } from 'react-query'
 import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler'
 import VerticalSpace from 'components/layout/VerticalSpace'
 import R from 'ramda'
+import FavContext from 'context/FavContext'
 
 
 
@@ -21,7 +22,8 @@ const MovieDetails = ({navigation,route}) => {
  
   const id = route.params.id
   const { getMovieDetails,getMovieRecommendations } = MovieDB()
- 
+  const {favList,addFavMovie,removeFavMovie} = useContext(FavContext)
+
   const {  data ,isLoading, error} =   useQuery(['MoviesDetails',id], 
     () => getMovieDetails(id))
 
@@ -53,8 +55,9 @@ const MovieDetails = ({navigation,route}) => {
           <Row direction={'flex-end'}>
           
             <HorizontalSpace width={'110px'}/>
-            
-            <Icon style={styles.iconStyle} size={24} color="white" name="heart" />
+            <TouchableOpacity onPress={()=> {if(favList.includes(data.id) === false) {addFavMovie(data.id) } else { removeFavMovie(data.id)}}}> 
+              <Icon style={styles.iconStyle} size={24}color={favList.includes(data.id) === true ? colors.radicalRed : 'white'} name="heart" />
+            </TouchableOpacity>
           </Row>
           
          
